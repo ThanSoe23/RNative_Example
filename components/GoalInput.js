@@ -1,4 +1,12 @@
-import { StyleSheet, View, TextInput, Button } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Button,
+  Modal,
+  Image,
+} from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 function GoalInput(props) {
   const [enteredGoalText, setEnteredGoalText] = useState("");
@@ -13,17 +21,29 @@ function GoalInput(props) {
   }
 
   return (
-    <View style={styles.body}>
-      <TextInput
-        placeholder="Your course goal!"
-        onChangeText={goalInputHandler}
-        value={enteredGoalText}
-        style={styles.appContainer}
-      />
-      <View style={styles.btn}>
-        <Button title="Add Goal" onPress={addGoalHandler} />
-      </View>
-    </View>
+    <>
+      <StatusBar />
+      <Modal visible={props.visible} animationType="slide">
+        <View style={styles.body}>
+          <Image source={require("../assets/images/step3_onboard.png")} />
+
+          <TextInput
+            placeholder="Your course goal!"
+            onChangeText={goalInputHandler}
+            value={enteredGoalText}
+            style={styles.appContainer}
+          />
+          <View style={styles.buttonContainer}>
+            <View style={styles.btn}>
+              <Button title="Add Goal" onPress={addGoalHandler} />
+            </View>
+            <View>
+              <Button title="Cancel" onPress={props.onCancel} />
+            </View>
+          </View>
+        </View>
+      </Modal>
+    </>
   );
 }
 export default GoalInput;
@@ -31,26 +51,38 @@ export default GoalInput;
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "start",
+    justifyContent: "start",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    paddingTop: "20%",
+    backgroundColor: "lightblue",
   },
   appContainer: {
+    width: "80%",
     height: 50,
-    width: 250,
     padding: 10,
     borderWidth: 1,
     borderColor: "indigo",
     borderRadius: 4,
+    marginTop: 50,
   },
 
   btn: {
     height: 50,
     marginLeft: 10,
-    paddingHorizontal: 8,
+    paddingHorizontal: 10,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 4,
     elevation: 3,
     backgroundColor: "black",
+  },
+
+  buttonContainer: {
+    width: "60%",
+    flexDirection: "row",
+    marginTop: 10,
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });
