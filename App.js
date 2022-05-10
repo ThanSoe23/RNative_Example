@@ -13,9 +13,9 @@ export default function App() {
       { text: enteredGoalText, id: Math.random().toString() },
     ]);
   }
-  function deleteGoalHandler() {
+  function deleteGoalHandler(id) {
     setCourseGoals((currentCourseGoals) => {
-      return currentCourseGoals.filter((goal) => goal.id != null);
+      return currentCourseGoals.filter((goal) => goal.id !== id);
     });
   }
   return (
