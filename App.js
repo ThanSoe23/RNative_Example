@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, FlatList, Button } from "react-native";
+import { StyleSheet, View, FlatList, Button, Alert } from "react-native";
 import { useState } from "react";
 import GoalItem from "./components/GoalItems";
 import GoalInput from "./components/GoalInput";
@@ -22,6 +22,7 @@ export default function App() {
     ]);
     endAddGoalHandler();
   }
+
   function deleteGoalHandler(id) {
     setCourseGoals((currentCourseGoals) => {
       return currentCourseGoals.filter((goal) => goal.id !== id);

@@ -5,6 +5,7 @@ import {
   Button,
   Modal,
   Image,
+  Alert,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
@@ -16,8 +17,14 @@ function GoalInput(props) {
   }
 
   function addGoalHandler() {
-    props.onAddGoal(enteredGoalText);
-    setEnteredGoalText("");
+    if (enteredGoalText == "") {
+      Alert.alert("Try Again", "Please fill data", [
+        { text: "okay", style: "destructive", onPress: setEnteredGoalText("") },
+      ]);
+    } else {
+      props.onAddGoal(enteredGoalText);
+      setEnteredGoalText("");
+    }
   }
 
   return (
