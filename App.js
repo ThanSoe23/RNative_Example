@@ -3,13 +3,15 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CategoriesPage from "./pages/CategoriesPage";
 import MealsOverviewPage from "./pages/MealsOverviewPage";
+import MealsDetailPage from "./pages/MealsDetailPage";
+import { Button } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
@@ -26,6 +28,7 @@ export default function App() {
             }}
           />
           <Stack.Screen name="MealsOverview" component={MealsOverviewPage} />
+          <Stack.Screen name="MealsDetail" component={MealsDetailPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

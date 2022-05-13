@@ -1,5 +1,19 @@
 import { StyleSheet, View, Text, Pressable, Image } from "react-native";
-function MealItem({ title, imageUrl, duration, complexity, affordability }) {
+import { useNavigation } from "@react-navigation/native";
+import MealDetails from "./MealDetail";
+function MealItem({
+  id,
+  title,
+  imageUrl,
+  duration,
+  complexity,
+  affordability,
+}) {
+  const navigation = useNavigation();
+  function selectMealItemHandler() {
+    navigation.navigate("MealsDetail", { mealId: id });
+  }
+
   return (
     <View style={styles.mealItem}>
       <Pressable
@@ -8,6 +22,7 @@ function MealItem({ title, imageUrl, duration, complexity, affordability }) {
           styles.button,
           pressed ? styles.buttonPress : null,
         ]}
+        onPress={selectMealItemHandler}
       >
         <View style={styles.innerContainer}>
           <View>
@@ -15,9 +30,11 @@ function MealItem({ title, imageUrl, duration, complexity, affordability }) {
             <Text style={styles.title}>{title}</Text>
           </View>
           <View style={styles.details}>
-            <Text style={styles.detailItem}>{duration}</Text>
-            <Text style={styles.detailItem}>{complexity.toUpperCase()}</Text>
-            <Text style={styles.detailItem}>{affordability.toUpperCase()}</Text>
+            <MealDetails
+              duration={duration}
+              complexity={complexity}
+              affordability={affordability}
+            />
           </View>
         </View>
       </Pressable>
